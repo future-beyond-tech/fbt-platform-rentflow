@@ -25,7 +25,7 @@ export const benefits: Benefit[] = [
 ];
 
 export const faqData: FAQItem[] = [
-  { question: "When will RentFlow launch?", answer: "We're targeting a private beta in Q2 2025. Waitlist members get first access." },
+  { question: "When will RentFlow launch?", answer: "We're targeting a private beta in Q3 2026. Waitlist members get first access." },
   { question: "What is usage-based pricing?", answer: "You pay only for transactions (e.g. rent collected), not per property or seat. Low occupancy = lower cost." },
   { question: "Is the 50% discount really lifetime?", answer: "Yes. Founding members who join from the waitlist lock in 50% off our standard usage fees for life." },
 ];
@@ -36,4 +36,15 @@ export const socialProof: SocialProofItem[] = [
   { stat: "₹0", label: "To join" },
 ];
 
-export const LAUNCH_DATE = "2025-06-01T00:00:00Z";
+export const LAUNCH_DATE = "2026-07-01T00:00:00Z";
+
+/** Founding spots remaining — drives scarcity */
+export const FOUNDING_SPOTS_TOTAL = 500;
+export const FOUNDING_SPOTS_CLAIMED = 347;
+
+export const foundingBenefits: { title: string; description: string }[] = [
+  { title: "50% lifetime discount", description: "Lock in half off usage fees forever." },
+  { title: "Feature voting rights", description: "Shape the product roadmap." },
+  { title: "Direct founder access", description: "Priority support and input." },
+  { title: "Early AI automation access", description: "First to new automation features." },
+];

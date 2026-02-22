@@ -389,15 +389,15 @@ export default function InvestorStorySection() {
             </div>
           </div>
 
-          <motion.button
-            type="button"
+          <motion.a
+            href="/investors"
             className="w-full sm:w-auto px-8 sm:px-10 py-4 sm:py-5 min-h-[44px] bg-white text-slate-900 font-bold text-base sm:text-lg rounded-full hover:bg-slate-100 transition-colors inline-flex items-center justify-center space-x-2"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            <span>Download Investment Deck</span>
+            <span>Request Investor Brief</span>
             <ArrowRight className="w-5 h-5" />
-          </motion.button>
+          </motion.a>
         </motion.div>
       </div>
     </section>
