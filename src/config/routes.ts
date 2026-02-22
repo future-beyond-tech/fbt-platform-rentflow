@@ -1,6 +1,7 @@
 export const routes = {
   home: "/",
   waitlist: "/waitlist",
+  investors: "/investors",
   login: "/login",
   register: "/register",
   dashboard: "/dashboard",

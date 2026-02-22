@@ -15,7 +15,7 @@ export const FinalCTA: FC = () => {
           viewport={{ once: true }}
           className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4"
         >
-          Ready to fix PG management?
+          Founding spots are limited. Lock in 50% off for life.
         </motion.h2>
         <motion.p
           initial={{ opacity: 0, y: 20 }}
@@ -23,7 +23,7 @@ export const FinalCTA: FC = () => {
           viewport={{ once: true }}
           className="text-blue-100 mb-6 sm:mb-8 text-sm sm:text-base"
         >
-          Join 500+ PG owners on the waitlist. 50% off for founding members.
+          Join 500+ operators. Get feature voting, founder access, and early AI automation.
         </motion.p>
         <motion.div
           initial={{ opacity: 0, y: 20 }}

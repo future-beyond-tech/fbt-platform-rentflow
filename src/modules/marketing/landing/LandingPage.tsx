@@ -3,23 +3,30 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-    Building2, Users, TrendingUp, Shield, Zap, Globe, ArrowRight, CheckCircle2, Play, Star, Menu, X,
+    Building2, Users, TrendingUp, Shield, Zap, Globe, ArrowRight, CheckCircle2, Play, Menu, X,
     Clock, Wallet, AlertTriangle, Calculator, FileText, Smartphone, BarChart3, Target, Briefcase,
     Crown, Sparkles, Phone, Linkedin, Twitter, Instagram, Mail, MapPin, ChevronRight, PieChart,
     Check, Award, HeartHandshake, Rocket, Gem, Trophy
 } from "lucide-react";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, AreaChart, Area, BarChart, Bar } from "recharts";
-import Image from "next/image";
+import { XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, AreaChart, Area, BarChart, Bar } from "recharts";
 import InvestorStorySection from "./components/InvestorStorySection";
+import DigitalizationMovementSection from "./components/DigitalizationMovementSection";
+import PGManagementSEOSection from "./components/PGManagementSEOSection";
+import WhyNowSection from "./components/WhyNowSection";
+import BuiltForScaleSection from "./components/BuiltForScaleSection";
+import ROICalculatorSection from "./components/ROICalculatorSection";
+import UseCaseSegmentsSection from "./components/UseCaseSegmentsSection";
+import Vision2027Section from "./components/Vision2027Section";
+import { AnimatedCounter } from "./components/AnimatedCounter";
 import { features, howItWorks } from "./data/landing";
 
 // --- Data ---
 const navItems = [
     { label: "Product", href: "#features" },
-    { label: "Solutions", href: "#solutions" },
-    { label: "Enterprise", href: "#enterprise" },
+    { label: "Use Cases", href: "#use-cases" },
+    { label: "Architecture", href: "#architecture" },
+    { label: "ROI", href: "#roi-calculator" },
     { label: "Pricing", href: "#pricing" },
-    { label: "Resources", href: "#resources" },
 ];
 
 const stats = [
@@ -32,40 +39,13 @@ const stats = [
 // Icons for features (order matches @/data/landing features array)
 const featureIcons = [Building2, Users, FileText, Wallet, BarChart3, Mail];
 
-const testimonials = [
-    {
-        name: "Priya Sharma",
-        role: "Director",
-        company: "Sharma PG Accommodations",
-        content: "RentFlow transformed our 12-property portfolio. We reduced admin time by 85% and increased collections by 23%. The automatic utility calculations alone save us 40 hours monthly.",
-        image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop&crop=face",
-        rating: 5,
-    },
-    {
-        name: "Rajesh Kumar",
-        role: "Founder",
-        company: "Kumar Properties",
-        content: "As an investor with 8 PGs across Bangalore, I needed visibility. RentFlow gives me real-time P&L for each property. The ROI dashboard identified underperforming assets instantly.",
-        image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
-        rating: 5,
-    },
-    {
-        name: "Anita Desai",
-        role: "Operations Head",
-        company: "Student Living India",
-        content: "We evaluated 12 solutions. Nothing else handled the Indian PG model—per-bed billing, food charges, dynamic utilities. It's built for our market, not imported.",
-        image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face",
-        rating: 5,
-    },
-];
-
 const pricingTiers = [
     {
         name: "Starter",
         price: "₹1,999",
         description: "Independent PG owners with 1-3 properties",
         features: ["Up to 50 beds", "Basic invoicing", "Mobile app", "Email support", "GST compliance"],
-        cta: "Start Trial",
+        cta: "Join Founding Operators",
     },
     {
         name: "Growth",
@@ -73,14 +53,14 @@ const pricingTiers = [
         description: "Growing portfolios with 4-10 properties",
         features: ["Up to 200 beds", "Advanced analytics", "Auto utilities", "WhatsApp integration", "API access", "Priority support"],
         highlighted: true,
-        cta: "Start Trial",
+        cta: "Join Founding Operators",
     },
     {
         name: "Enterprise",
         price: "Custom",
         description: "Large portfolios, co-living chains, institutions",
         features: ["Unlimited beds", "Dedicated manager", "Custom integrations", "SLA guarantee", "White-label"],
-        cta: "Contact Sales",
+        cta: "Become an Early Access Partner",
     },
 ];
 
@@ -134,12 +114,12 @@ const Navbar = () => {
                     </div>
 
                     <div className="hidden md:flex items-center space-x-4">
-                        <button className={`text-sm font-medium transition-colors ${isScrolled ? "text-slate-600 hover:text-slate-900" : "text-white/90 hover:text-white"}`}>
+                        <a href="/waitlist" className={`text-sm font-medium transition-colors ${isScrolled ? "text-slate-600 hover:text-slate-900" : "text-white/90 hover:text-white"}`}>
                             Sign In
-                        </button>
-                        <motion.button className="px-6 py-2.5 bg-blue-600 text-white text-sm font-semibold rounded-full hover:bg-blue-700 transition-colors shadow-lg shadow-blue-500/25" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                            Get Started
-                        </motion.button>
+                        </a>
+                        <motion.a href="/waitlist" className="px-6 py-2.5 bg-blue-600 text-white text-sm font-semibold rounded-full hover:bg-blue-700 transition-colors shadow-lg shadow-blue-500/25" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                            Join Founding Operators
+                        </motion.a>
                     </div>
 
                     <button type="button" aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"} className="md:hidden p-3 min-h-[44px] min-w-[44px] flex items-center justify-center rounded-lg hover:bg-white/10 active:bg-white/20 transition-colors" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
@@ -158,8 +138,8 @@ const Navbar = () => {
                                 </a>
                             ))}
                             <div className="pt-4 space-y-3">
-                                <button className="block w-full text-left text-base font-medium text-slate-600">Sign In</button>
-                                <button className="w-full px-6 py-3 bg-blue-600 text-white font-semibold rounded-full">Get Started</button>
+                                <a href="/waitlist" className="block w-full text-left text-base font-medium text-slate-600">Sign In</a>
+                                <a href="/waitlist" className="block w-full px-6 py-3 bg-blue-600 text-white font-semibold rounded-full text-center">Join Founding Operators</a>
                             </div>
                         </div>
                     </motion.div>
@@ -171,46 +151,62 @@ const Navbar = () => {
 
 const Hero = () => {
     return (
-        <section className="relative min-h-[100dvh] min-h-screen flex items-center justify-center overflow-hidden bg-slate-900">
+        <section className="relative min-h-[100dvh] min-h-screen flex items-center justify-center overflow-hidden bg-slate-900" aria-labelledby="hero-heading">
             <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900" />
             <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1920&q=80')] bg-cover bg-center opacity-10" />
 
-            <motion.div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl" animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }} transition={{ duration: 8, repeat: Infinity }} />
-            <motion.div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-indigo-500/20 rounded-full blur-3xl" animate={{ scale: [1.2, 1, 1.2], opacity: [0.5, 0.3, 0.5] }} transition={{ duration: 8, repeat: Infinity }} />
+            <motion.div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl" animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }} transition={{ duration: 8, repeat: Infinity }} aria-hidden />
+            <motion.div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-indigo-500/20 rounded-full blur-3xl" animate={{ scale: [1.2, 1, 1.2], opacity: [0.5, 0.3, 0.5] }} transition={{ duration: 8, repeat: Infinity }} aria-hidden />
 
             <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
                 <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="inline-flex flex-wrap items-center justify-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 mb-6 sm:mb-8">
-                    <Sparkles className="w-4 h-4 text-blue-400 flex-shrink-0" />
-                    <span className="text-xs sm:text-sm font-medium text-blue-300 text-center">World-First Innovation in Property Management</span>
+                    <Sparkles className="w-4 h-4 text-blue-400 flex-shrink-0" aria-hidden />
+                    <span className="text-xs sm:text-sm font-medium text-blue-300 text-center">India&apos;s First Usage-Based Operating System</span>
                 </motion.div>
 
-                <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.1 }} className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-4 sm:mb-6 leading-tight">
-                    The Future of <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400">Property Management</span>
+                <motion.h1 id="hero-heading" initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.1 }} className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-4 sm:mb-6 leading-tight max-w-5xl mx-auto">
+                    India&apos;s First Usage-Based Operating System for <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400">PG & Co-Living Infrastructure</span>
                 </motion.h1>
 
-                <motion.p initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.2 }} className="text-base sm:text-xl md:text-2xl text-slate-300 mb-6 sm:mb-8 max-w-3xl mx-auto leading-relaxed px-1">
-                    RentFlow eliminates 35 hours of monthly admin work with zero-friction operations, usage-based pricing, and infinite scalability. Built for Indian PG owners, loved by enterprise portfolios.
+                <motion.p initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.2 }} className="text-base sm:text-lg md:text-xl lg:text-2xl text-slate-300 mb-8 sm:mb-10 max-w-4xl mx-auto leading-relaxed px-1">
+                    Automate 35+ admin hours per month. Recover hidden revenue leakage. Scale from 1 bed to 1,000 properties — without increasing operational overhead.
                 </motion.p>
 
+                <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.25 }} className="flex flex-wrap items-center justify-center gap-6 sm:gap-10 mb-8 sm:mb-10">
+                    <div className="text-center">
+                        <p className="text-2xl sm:text-3xl md:text-4xl font-bold text-white">
+                            <AnimatedCounter value={35} suffix="+" /> <span className="text-slate-400 font-normal text-lg sm:text-xl">hrs</span>
+                        </p>
+                        <p className="text-slate-400 text-xs sm:text-sm font-medium">admin saved/month</p>
+                    </div>
+                    <div className="w-px h-12 bg-white/20 hidden sm:block" aria-hidden />
+                    <div className="text-center">
+                        <p className="text-2xl sm:text-3xl md:text-4xl font-bold text-green-400">
+                            <AnimatedCounter value={23} suffix="%" />
+                        </p>
+                        <p className="text-slate-400 text-xs sm:text-sm font-medium">revenue impact</p>
+                    </div>
+                </motion.div>
+
                 <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.3 }} className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 sm:gap-4 mb-8 sm:mb-12 w-full max-w-lg sm:max-w-none mx-auto">
-                    <motion.button type="button" className="group w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 min-h-[44px] bg-blue-600 text-white text-sm sm:text-base font-semibold rounded-full hover:bg-blue-700 transition-all shadow-xl shadow-blue-500/25 flex items-center justify-center space-x-2" whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-                        <span>Start Free Trial</span>
-                        <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform flex-shrink-0" />
-                    </motion.button>
-                    <motion.button type="button" className="group w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 min-h-[44px] bg-white/10 backdrop-blur-sm text-white text-sm sm:text-base font-semibold rounded-full hover:bg-white/20 transition-all border border-white/20 flex items-center justify-center space-x-2" whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-                        <Play className="w-5 h-5 flex-shrink-0" />
-                        <span>Watch Demo</span>
-                    </motion.button>
+                    <motion.a href="/waitlist" className="group w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 min-h-[44px] bg-blue-600 text-white text-sm sm:text-base font-semibold rounded-full hover:bg-blue-700 transition-all shadow-xl shadow-blue-500/25 flex items-center justify-center space-x-2" whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                        <span>Join Founding Operators</span>
+                        <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform flex-shrink-0" aria-hidden />
+                    </motion.a>
+                    <motion.a href="#architecture" className="group w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 min-h-[44px] bg-white/10 backdrop-blur-sm text-white text-sm sm:text-base font-semibold rounded-full hover:bg-white/20 transition-all border border-white/20 flex items-center justify-center space-x-2" whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                        <Play className="w-5 h-5 flex-shrink-0" aria-hidden />
+                        <span>View Platform Architecture</span>
+                    </motion.a>
                 </motion.div>
 
                 <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8, delay: 0.5 }} className="flex flex-wrap items-center justify-center gap-4 sm:gap-8 text-slate-400 text-xs sm:text-sm">
-                    <div className="flex items-center space-x-2"><CheckCircle2 className="w-5 h-5 text-green-400" /><span>No credit card required</span></div>
-                    <div className="flex items-center space-x-2"><CheckCircle2 className="w-5 h-5 text-green-400" /><span>14-day free trial</span></div>
-                    <div className="flex items-center space-x-2"><CheckCircle2 className="w-5 h-5 text-green-400" /><span>Cancel anytime</span></div>
+                    <div className="flex items-center space-x-2"><CheckCircle2 className="w-5 h-5 text-green-400" aria-hidden /><span>Usage-based — pay as you scale</span></div>
+                    <div className="flex items-center space-x-2"><CheckCircle2 className="w-5 h-5 text-green-400" aria-hidden /><span>Zero lock-in</span></div>
+                    <div className="flex items-center space-x-2"><CheckCircle2 className="w-5 h-5 text-green-400" aria-hidden /><span>Enterprise-grade security</span></div>
                 </motion.div>
             </div>
 
-            <motion.div className="absolute bottom-8 left-1/2 -translate-x-1/2" animate={{ y: [0, 10, 0] }} transition={{ duration: 2, repeat: Infinity }}>
+            <motion.div className="absolute bottom-8 left-1/2 -translate-x-1/2" animate={{ y: [0, 10, 0] }} transition={{ duration: 2, repeat: Infinity }} aria-hidden>
                 <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center pt-2"><div className="w-1.5 h-3 bg-white/50 rounded-full" /></div>
             </motion.div>
         </section>
@@ -514,45 +510,6 @@ const ROISection = () => {
     );
 };
 
-const Testimonials = () => {
-    return (
-        <section className="py-16 sm:py-20 md:py-24 bg-slate-50">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-16">
-                    <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-yellow-100 text-yellow-700 text-sm font-semibold mb-4 sm:mb-6">
-                        <Star className="w-4 h-4 fill-current flex-shrink-0" />
-                        <span>Customer Success</span>
-                    </motion.div>
-                    <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900 mb-6">
-                        Trusted by Industry Leaders
-                    </motion.h2>
-                </div>
-
-                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
-                    {testimonials.map((testimonial, index) => (
-                        <motion.div key={testimonial.name} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: index * 0.1 }} className="bg-white p-6 sm:p-8 rounded-2xl sm:rounded-3xl shadow-sm hover:shadow-xl transition-shadow min-w-0">
-                            <div className="flex items-center space-x-1 mb-4 sm:mb-6">
-                                {[...Array(testimonial.rating)].map((_, i) => (
-                                    <Star key={i} className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-400 fill-current" />
-                                ))}
-                            </div>
-                            <p className="text-slate-700 text-base sm:text-lg leading-relaxed mb-4 sm:mb-6 min-w-0">&quot;{testimonial.content}&quot;</p>
-                            <div className="flex items-center space-x-3 sm:space-x-4 min-w-0">
-                                <Image src={testimonial.image} alt={testimonial.name} width={56} height={56} className="w-12 h-12 sm:w-14 sm:h-14 rounded-full object-cover flex-shrink-0" unoptimized />
-                                <div className="min-w-0">
-                                    <div className="font-semibold text-slate-900 text-sm sm:text-base truncate">{testimonial.name}</div>
-                                    <div className="text-slate-500 text-xs sm:text-sm">{testimonial.role}</div>
-                                    <div className="text-blue-600 text-xs sm:text-sm font-medium truncate">{testimonial.company}</div>
-                                </div>
-                            </div>
-                        </motion.div>
-                    ))}
-                </div>
-            </div>
-        </section>
-    );
-};
-
 const Pricing = () => {
     return (
         <section id="pricing" className="py-16 sm:py-20 md:py-24 bg-white">
@@ -590,9 +547,9 @@ const Pricing = () => {
                                     </li>
                                 ))}
                             </ul>
-                            <motion.button type="button" className={`w-full py-3.5 sm:py-4 min-h-[44px] rounded-full font-semibold transition-all mt-auto ${tier.highlighted ? "bg-white text-blue-600 hover:bg-blue-50" : "bg-slate-900 text-white hover:bg-slate-800"}`} whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                            <motion.a href="/waitlist" className={`w-full py-3.5 sm:py-4 min-h-[44px] rounded-full font-semibold transition-all mt-auto flex items-center justify-center ${tier.highlighted ? "bg-white text-blue-600 hover:bg-blue-50" : "bg-slate-900 text-white hover:bg-slate-800"}`} whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
                                 {tier.cta}
-                            </motion.button>
+                            </motion.a>
                         </motion.div>
                     ))}
                 </div>
@@ -713,34 +670,34 @@ const Investors = () => {
 
 const CTA = () => {
     return (
-        <section className="py-16 sm:py-20 md:py-24 bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-700 text-white overflow-hidden">
+        <section className="py-16 sm:py-20 md:py-24 bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-700 text-white overflow-hidden" aria-labelledby="cta-heading">
             <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative">
-                <div className="absolute inset-0 opacity-10 pointer-events-none">
+                <div className="absolute inset-0 opacity-10 pointer-events-none" aria-hidden>
                     <div className="absolute top-0 left-0 w-72 h-72 bg-white rounded-full blur-3xl" />
                     <div className="absolute bottom-0 right-0 w-96 h-96 bg-white rounded-full blur-3xl" />
                 </div>
 
                 <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }} className="relative z-10">
-                    <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6">Ready to Transform Your Property Business?</h2>
+                    <h2 id="cta-heading" className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6">Join the Operators Building India&apos;s Rental Infrastructure</h2>
                     <p className="text-base sm:text-xl md:text-2xl text-blue-100 mb-8 sm:mb-10 max-w-3xl mx-auto px-1">
-                        Join 500+ property owners who have eliminated 35 hours of monthly admin work and increased revenue by 23% on average.
+                        Scale from 1 bed to 1,000 properties on one platform. Usage-based. Zero lock-in. Built for the long term.
                     </p>
 
                     <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 sm:gap-4 max-w-md sm:max-w-none mx-auto">
-                        <motion.button type="button" className="w-full sm:w-auto px-8 sm:px-10 py-4 sm:py-5 min-h-[44px] bg-white text-blue-600 font-bold text-base sm:text-lg rounded-full hover:bg-blue-50 transition-colors shadow-2xl flex items-center justify-center space-x-2" whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-                            <span>Start Free Trial</span>
-                            <ArrowRight className="w-5 h-5 flex-shrink-0" />
-                        </motion.button>
-                        <motion.button type="button" className="w-full sm:w-auto px-8 sm:px-10 py-4 sm:py-5 min-h-[44px] bg-transparent text-white font-bold text-base sm:text-lg rounded-full border-2 border-white/30 hover:bg-white/10 transition-colors flex items-center justify-center space-x-2" whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-                            <Phone className="w-5 h-5 flex-shrink-0" />
-                            <span>Talk to Sales</span>
-                        </motion.button>
+                        <motion.a href="/waitlist" className="w-full sm:w-auto px-8 sm:px-10 py-4 sm:py-5 min-h-[44px] bg-white text-blue-600 font-bold text-base sm:text-lg rounded-full hover:bg-blue-50 transition-colors shadow-2xl flex items-center justify-center space-x-2" whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                            <span>Join Founding Operators</span>
+                            <ArrowRight className="w-5 h-5 flex-shrink-0" aria-hidden />
+                        </motion.a>
+                        <motion.a href="#architecture" className="w-full sm:w-auto px-8 sm:px-10 py-4 sm:py-5 min-h-[44px] bg-transparent text-white font-bold text-base sm:text-lg rounded-full border-2 border-white/30 hover:bg-white/10 transition-colors flex items-center justify-center space-x-2" whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                            <Phone className="w-5 h-5 flex-shrink-0" aria-hidden />
+                            <span>See How You Scale</span>
+                        </motion.a>
                     </div>
 
                     <div className="mt-8 sm:mt-12 flex flex-wrap items-center justify-center gap-4 sm:gap-8 text-blue-100 text-sm sm:text-base">
-                        <div className="flex items-center space-x-2"><CheckCircle2 className="w-5 h-5" /><span>14-day free trial</span></div>
-                        <div className="flex items-center space-x-2"><CheckCircle2 className="w-5 h-5" /><span>No credit card</span></div>
-                        <div className="flex items-center space-x-2"><CheckCircle2 className="w-5 h-5" /><span>Free onboarding</span></div>
+                        <div className="flex items-center space-x-2"><CheckCircle2 className="w-5 h-5" aria-hidden /><span>Usage-based pricing</span></div>
+                        <div className="flex items-center space-x-2"><CheckCircle2 className="w-5 h-5" aria-hidden /><span>No credit card to start</span></div>
+                        <div className="flex items-center space-x-2"><CheckCircle2 className="w-5 h-5" aria-hidden /><span>View Platform Blueprint</span></div>
                     </div>
                 </motion.div>
             </div>
@@ -768,7 +725,7 @@ const Footer = () => {
                             <span className="text-xl sm:text-2xl font-bold text-white truncate">RentFlow</span>
                         </div>
                         <p className="text-xs sm:text-sm leading-relaxed mb-4 sm:mb-6 max-w-xs">
-                            The world&apos;s first usage-based property management platform. Built for infinite scale, designed for zero friction.
+                            India&apos;s first usage-based operating system for PG & co-living infrastructure. Built for scale. Built to last.
                         </p>
                         <div className="flex flex-wrap gap-3 sm:space-x-4 sm:gap-0">
                             <a href="#" className="w-10 h-10 bg-slate-900 rounded-lg flex items-center justify-center hover:bg-blue-600 hover:text-white transition-colors">
@@ -797,6 +754,18 @@ const Footer = () => {
                     ))}
                 </div>
 
+                <div className="border-t border-slate-800 pt-8 sm:pt-10 mb-8 sm:mb-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <p className="text-white font-semibold text-center sm:text-left">Ready to scale?</p>
+                    <div className="flex flex-wrap items-center justify-center gap-3">
+                        <a href="/waitlist" className="px-5 py-2.5 rounded-full bg-blue-600 text-white text-sm font-semibold hover:bg-blue-700 transition-colors">
+                            Join Founding Operators
+                        </a>
+                        <a href="#architecture" className="px-5 py-2.5 rounded-full border border-slate-600 text-slate-300 text-sm font-semibold hover:bg-white/5 hover:text-white transition-colors">
+                            View Platform Blueprint
+                        </a>
+                    </div>
+                </div>
+
                 <div className="border-t border-slate-900 pt-6 sm:pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
                     <p className="text-xs sm:text-sm mb-0 text-center md:text-left">© 2026 RentFlow by Future Beyond Tech. All rights reserved.</p>
                     <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 text-xs sm:text-sm">
@@ -816,15 +785,21 @@ export default function RentFlowLandingPage() {
         <main className="min-h-screen bg-white">
             <Navbar />
             <Hero />
+            <WhyNowSection />
             <Stats />
+            <BuiltForScaleSection />
             <ProblemSolution />
+            <ROICalculatorSection />
+            <UseCaseSegmentsSection />
             <Features />
             <HowItWorksSection />
             <ROISection />
-            <Testimonials />
+            <DigitalizationMovementSection />
             <Pricing />
             <InvestorStorySection />
             <Investors />
+            <Vision2027Section />
+            <PGManagementSEOSection />
             <CTA />
             <Footer />
         </main>
