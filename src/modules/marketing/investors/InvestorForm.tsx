@@ -38,9 +38,23 @@ export function InvestorForm() {
     if (!state.fullName.trim() || !state.email.trim()) return;
     setState((s) => ({ ...s, status: "loading" }));
     try {
-      // Replace with your backend/API endpoint or email service
-      await new Promise((r) => setTimeout(r, 800));
-      setState({ ...initialState, status: "success" });
+      const response = await fetch("/api/investors", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          fullName: state.fullName.trim(),
+          email: state.email.trim(),
+          investorType: state.investorType || undefined,
+          linkedinUrl: state.linkedinUrl?.trim() || undefined,
+          message: state.message?.trim() || undefined,
+        }),
+      });
+      const data = await response.json();
+      if (data.success) {
+        setState({ ...initialState, status: "success" });
+      } else {
+        setState((s) => ({ ...s, status: "error" }));
+      }
     } catch {
       setState((s) => ({ ...s, status: "error" }));
     }
