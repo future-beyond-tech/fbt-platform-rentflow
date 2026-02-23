@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import {
   BarChart,
@@ -66,10 +66,54 @@ const defaultInputs: CalculatorInputs = {
   utilityCostPerBed: 800,
 };
 
+const ROI_SESSION_KEY = "roi_session_id";
+
+function getSessionId(): string {
+  if (typeof window === "undefined") return "";
+  let id = sessionStorage.getItem(ROI_SESSION_KEY);
+  if (!id) {
+    id = "sess_" + Math.random().toString(36).slice(2, 12);
+    sessionStorage.setItem(ROI_SESSION_KEY, id);
+  }
+  return id;
+}
+
+function logCalculation(inputs: CalculatorInputs, results: ReturnType<typeof computeROI>) {
+  fetch("/api/analytics/roi", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      sessionId: getSessionId(),
+      inputs: {
+        properties: inputs.properties,
+        bedsPerProperty: inputs.bedsPerProperty,
+        avgRent: inputs.avgRent,
+        utilityCostPerBed: inputs.utilityCostPerBed,
+      },
+      results: {
+        adminHoursSaved: results.adminHoursSaved,
+        revenueLeakageRecovered: results.revenueLeakageRecovered,
+        annualProfitImpact: results.annualProfitImpact,
+        costReductionPct: results.costReductionPct,
+      },
+      source: "landing_page",
+    }),
+  }).catch(() => {});
+}
+
 export default function ROICalculatorSection() {
   const [inputs, setInputs] = useState<CalculatorInputs>(defaultInputs);
+  const lastLogged = useRef<string>("");
 
-  const roi = useMemo(() => computeROI(inputs), [inputs]);
+  const roi = useMemo(() => {
+    const result = computeROI(inputs);
+    const key = JSON.stringify(inputs);
+    if (key !== lastLogged.current) {
+      lastLogged.current = key;
+      logCalculation(inputs, result);
+    }
+    return result;
+  }, [inputs]);
 
   const update = (key: keyof CalculatorInputs, value: number) => {
     setInputs((prev) => ({ ...prev, [key]: Math.max(0, value) }));
