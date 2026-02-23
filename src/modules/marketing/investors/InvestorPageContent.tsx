@@ -148,19 +148,70 @@ export function InvestorPageContent() {
         </div>
       </section>
 
-      {/* Section 4 — What We're Building */}
-      <section className="py-14 sm:py-20 px-4 sm:px-6 lg:px-8 bg-slate-50" aria-labelledby="building-heading">
+      {/* Section 4 — Security & Architecture */}
+      <section className="py-14 sm:py-20 px-4 sm:px-6 lg:px-8 bg-slate-50" aria-labelledby="security-heading">
         <div className="max-w-3xl mx-auto">
-          <motion.h2 id="building-heading" className="text-2xl sm:text-3xl font-bold text-slate-900 mb-6" {...fade}>
-            Infrastructure, Not Another Tool
+          <motion.h2 id="security-heading" className="text-2xl sm:text-3xl font-bold text-slate-900 mb-6" {...fade}>
+            Security & Architecture
           </motion.h2>
-          <motion.ul className="space-y-3 text-slate-700" {...fade} role="list">
-            <li>Usage-based pricing engine</li>
-            <li>Multi-tenant architecture</li>
-            <li>Clean Architecture backend</li>
-            <li>Scalable system design—built for 1 to 1,000+ properties</li>
-            <li>Enterprise-grade principles</li>
-            <li>Zero-downtime deployment strategy</li>
+          <motion.p className="text-slate-700 leading-relaxed mb-6" {...fade}>
+            RentFlow is built as a platform, not a single product. At its core is a proprietary identity and security layer that gives us control, compliance readiness, and the ability to scale across products without depending on third-party identity vendors. This foundation enables true single sign-on, role-based access, and audit-ready trails—positioning us for enterprise and institutional customers from day one.
+          </motion.p>
+          <motion.ul className="space-y-3 text-slate-700 mb-8" {...fade} role="list">
+            <li><strong>Proprietary identity layer</strong> — Centralized authentication and single sign-on across current and future products.</li>
+            <li><strong>Enterprise-ready security</strong> — Role-based and scope-based access, multi-factor authentication, and multi-device session control.</li>
+            <li><strong>Compliance-ready</strong> — Full audit trails and controls designed for SOC 2 and institutional requirements.</li>
+            <li><strong>Vendor-independent</strong> — No lock-in to external identity providers; infrastructure-based economics, not per-user identity fees.</li>
+            <li><strong>Scalable by design</strong> — Stateless validation at the gateway, multi-tenant isolation, built for one property to thousands.</li>
+          </motion.ul>
+          <motion.div className="rounded-xl border border-slate-200 bg-white p-6" {...fade}>
+            <p className="text-slate-700 leading-relaxed mb-4">
+              Most property and rental tools rely on third-party identity and bolt-on security. We own the identity layer. That means we control the roadmap for SSO, compliance, and multi-product expansion—without per-seat identity costs or vendor negotiations. For operators scaling to dozens of properties and for institutional investors who need auditability, that&apos;s a structural advantage.
+            </p>
+            <p className="text-slate-600 text-sm italic">
+              RentFlow is the first product on a platform built to power multiple offerings—from PG and co-living today to broader rental and asset operations tomorrow. The same identity, security, and data layer that runs RentFlow is designed to support future products without re-architecting.
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Section 4b — Long-Term Moat & Scalability */}
+      <section className="py-14 sm:py-20 px-4 sm:px-6 lg:px-8" aria-labelledby="moat-heading">
+        <div className="max-w-3xl mx-auto">
+          <motion.h2 id="moat-heading" className="text-2xl sm:text-3xl font-bold text-slate-900 mb-6" {...fade}>
+            Why We&apos;re Built to Last
+          </motion.h2>
+          <motion.ul className="space-y-4 text-slate-700" {...fade} role="list">
+            <li className="flex items-start gap-3">
+              <span className="w-6 h-6 rounded-full bg-slate-900 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <Check className="w-4 h-4 text-white" aria-hidden />
+              </span>
+              <span><strong>Proprietary identity and security</strong> — Reduces dependency on external vendors and supports enterprise sales and compliance from day one.</span>
+            </li>
+            <li className="flex items-start gap-3">
+              <span className="w-6 h-6 rounded-full bg-slate-900 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <Check className="w-4 h-4 text-white" aria-hidden />
+              </span>
+              <span><strong>Infrastructure-based cost model</strong> — Scales with usage, not per-seat identity or feature fees; better unit economics as we grow.</span>
+            </li>
+            <li className="flex items-start gap-3">
+              <span className="w-6 h-6 rounded-full bg-slate-900 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <Check className="w-4 h-4 text-white" aria-hidden />
+              </span>
+              <span><strong>Platform architecture</strong> — New products and segments can launch on the same core security and data layer without rebuilding.</span>
+            </li>
+            <li className="flex items-start gap-3">
+              <span className="w-6 h-6 rounded-full bg-slate-900 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <Check className="w-4 h-4 text-white" aria-hidden />
+              </span>
+              <span><strong>Single sign-on and centralized identity</strong> — Increase stickiness and enable multi-product expansion under one account.</span>
+            </li>
+            <li className="flex items-start gap-3">
+              <span className="w-6 h-6 rounded-full bg-slate-900 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <Check className="w-4 h-4 text-white" aria-hidden />
+              </span>
+              <span><strong>Audit trails and enterprise controls</strong> — Position us for institutional customers and SOC 2–ready deployments.</span>
+            </li>
           </motion.ul>
         </div>
       </section>
