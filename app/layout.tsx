@@ -10,13 +10,13 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
-  title: "RentFlow - The Future of Property Management | FBT",
+  title: "RentFlow — India's First Usage-Based OS for PG & Co-Living | FBT",
   description: siteConfig.description,
-  keywords: ["property management", "PG management", "rent collection", "tenant management", "SaaS", "RentFlow", "Future Beyond Tech"],
+  keywords: ["PG management software India", "co-living software India", "property management platform India", "usage-based pricing SaaS", "RentFlow", "Future Beyond Tech"],
   authors: [{ name: "Future Beyond Tech" }],
   openGraph: {
-    title: "RentFlow - The Future of Property Management",
-    description: "World's first usage-based property management platform. Zero friction. Infinite scale.",
+    title: "RentFlow — India's First Usage-Based OS for PG & Co-Living",
+    description: siteConfig.description,
     type: "website",
     locale: "en_IN",
   },
